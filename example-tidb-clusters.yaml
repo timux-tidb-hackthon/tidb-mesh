@@ -1,0 +1,52 @@
+
+apiVersion: pingcap.com/v1alpha1
+kind: TidbCluster
+metadata:
+  name: storage-layer
+spec:
+  version: v5.2.1
+  pd:
+    baseImage: uhub.service.ucloud.cn/pingcap/pd
+    replicas: 1
+    requests:
+      storage: "1Gi"
+    config: {}
+  tikv:
+    baseImage: uhub.service.ucloud.cn/pingcap/tikv
+    replicas: 1
+    requests:
+      storage: "1Gi"
+    config: {}
+---
+apiVersion: pingcap.com/v1alpha1
+kind: TidbCluster
+metadata:
+  name: cluster1
+spec:
+  version: v5.2.1
+  cluster:
+    name: storage-layer
+  tidb:
+    baseImage: uhub.service.ucloud.cn/pingcap/tidb
+    replicas: 1
+    service:
+      type: ClusterIP
+    config: {}
+---
+apiVersion: pingcap.com/v1alpha1
+kind: TidbCluster
+metadata:
+  name: cluster2
+spec:
+  version: v5.2.1
+  cluster:
+    name: storage-layer
+  tidb:
+    baseImage: uhub.service.ucloud.cn/pingcap/tidb
+    replicas: 1
+    service:
+      type: ClusterIP
+    config: {}
+
+
+
