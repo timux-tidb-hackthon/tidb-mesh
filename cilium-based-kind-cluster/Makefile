@@ -5,7 +5,7 @@ init:
 
 dev:
 	cd cilium && make kind-image
-	cilium install --agent-image localhost:5000/cilium/cilium-dev:local
+	kubectl delete pods -l k8s-app=cilium -n kube-system
 
 deploy-tidb-operator:
 	kubectl create -f https://raw.githubusercontent.com/pingcap/tidb-operator/master/manifests/crd.yaml
@@ -17,6 +17,8 @@ deploy-tidb-operator:
 		--set scheduler.kubeSchedulerImageName=registry.cn-hangzhou.aliyuncs.com/google_containers/kube-scheduler
 
 deploy-tidb:
+	kubectl create ns pingcap
+	kubectl ns pingcap
 	kubectl apply -f example-tidb-clusters.yaml
 
 enable-cilium-ui:
