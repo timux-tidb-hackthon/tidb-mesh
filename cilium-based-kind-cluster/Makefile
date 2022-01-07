@@ -7,6 +7,13 @@ dev:
 	cd cilium && make kind-image
 	kubectl delete pods -l k8s-app=cilium -n kube-system
 
+cloud-init:
+	cd cilium && make kind
+	cilium install --agent-image registry-vpc.cn-heyuan.aliyuncs.com/handlerww/cilium-dev:latest
+
+cloud-dev:
+	kubectl delete pods -l k8s-app=cilium -n kube-system
+
 deploy-tidb-operator:
 	kubectl create -f https://raw.githubusercontent.com/pingcap/tidb-operator/master/manifests/crd.yaml
 	helm repo add pingcap https://charts.pingcap.org/
