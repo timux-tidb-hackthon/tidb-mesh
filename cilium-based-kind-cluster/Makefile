@@ -39,3 +39,6 @@ download-cilium-cli-ui:
 
 logs:
 	kubectl get pod -l k8s-app=cilium -n kube-system |grep cilium | awk '{system ("kubectl logs -n kube-system " $1 " > " $1 ".log && code " $1 ".log")}'
+
+test:
+	go test -timeout 30s -run ^Test github.com/cilium/cilium/proxylib/tidb -v
