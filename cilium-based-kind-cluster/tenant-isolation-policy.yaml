@@ -1,0 +1,19 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "tenant-isolation"
+spec:
+  description: "enable multi tenant network policy"
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/managed-by: tidb-operator
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            app.kubernetes.io/component: tidb
+      toPorts:
+        - ports:
+            - port: "20160"
+              protocol: TCP
+          rules:
+            l7proto: tidb
