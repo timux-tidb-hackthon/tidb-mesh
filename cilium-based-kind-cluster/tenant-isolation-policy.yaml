@@ -15,5 +15,24 @@ spec:
         - ports:
             - port: "20160"
               protocol: TCP
+            - port: "10261"
+              protocol: TCP
+            - port: "10080"
+              protocol: TCP
+          rules:
+            l7proto: tidb
+    - fromEndpoints:
+        - matchLabels:
+            app.kubernetes.io/component: pd
+      toPorts:
+        - ports:
+            - port: "20160"
+              protocol: TCP
+            - port: "10261"
+              protocol: TCP
+            - port: "2379"
+              protocol: TCP
+            - port: "10080"
+              protocol: TCP
           rules:
             l7proto: tidb
