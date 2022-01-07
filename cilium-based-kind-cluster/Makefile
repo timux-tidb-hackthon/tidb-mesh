@@ -27,6 +27,7 @@ deploy-tidb:
 	kubectl create ns pingcap
 	kubectl ns pingcap
 	kubectl apply -f example-tidb-clusters.yaml
+	kubectl apply -f tenant-isolation-policy.yaml
 
 enable-cilium-ui:
 	cilium hubble enable --ui
