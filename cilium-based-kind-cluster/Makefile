@@ -36,3 +36,6 @@ download-cilium-cli-ui:
 	curl -L --remote-name-all https://github.com/cilium/cilium-cli/releases/latest/download/cilium-linux-amd64.tar.gz && sudo tar xzvfC cilium-linux-amd64.tar.gz /usr/local/bin && rm cilium-linux-amd64.tar.gz
 	export HUBBLE_VERSION=$(curl -s https://raw.githubusercontent.com/cilium/hubble/master/stable.txt)
 	curl -L --remote-name-all https://github.com/cilium/hubble/releases/download/$HUBBLE_VERSION/hubble-linux-amd64.tar.gz && sudo tar xzvfC hubble-linux-amd64.tar.gz /usr/local/bin && rm hubble-linux-amd64.tar.gz
+
+logs:
+	kubectl get pod -l k8s-app=cilium -n kube-system |grep cilium | awk '{system ("kubectl logs -n kube-system " $1 " > " $1 ".log && code " $1 ".log")}'
