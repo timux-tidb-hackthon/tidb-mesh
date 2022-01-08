@@ -8,12 +8,14 @@ spec:
   pd:
     baseImage: uhub.service.ucloud.cn/pingcap/pd
     replicas: 1
+    maxFailoverCount: 0
     requests:
       storage: "1Gi"
     config: {}
   tikv:
     baseImage: uhub.service.ucloud.cn/pingcap/tikv
     replicas: 1
+    maxFailoverCount: 0
     requests:
       storage: "1Gi"
     config: {}
@@ -29,6 +31,7 @@ spec:
   tidb:
     baseImage: uhub.service.ucloud.cn/pingcap/tidb
     replicas: 1
+    maxFailoverCount: 0
     service:
       type: ClusterIP
     config: {}
@@ -44,9 +47,7 @@ spec:
   tidb:
     baseImage: uhub.service.ucloud.cn/pingcap/tidb
     replicas: 1
+    maxFailoverCount: 0
     service:
       type: ClusterIP
     config: {}
-
-
-
